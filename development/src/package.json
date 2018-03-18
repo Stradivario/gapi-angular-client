@@ -1,0 +1,38 @@
+{
+  "name": "gapi-angular-client",
+  "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Stradivario/gapi-angular-client.git"
+  },
+  "author": {
+    "name": "Kristian Tachev(Stradivario)",
+    "email": "kristiqn.tachev@gmail.com"
+  },
+  "keywords": [
+    "angular"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "http://gitlab.youvolio.com/gapi/gapi-angular-client/issues"
+  },
+  "module": "gapi-angular-client.js",
+  "typings": "gapi-angular-client.d.ts",
+  "peerDependencies": {
+    "@angular/core": "^5.2.0",
+    "rxjs": "^5.5.0",
+    "zone.js": "^0.8.0"
+  },
+  "dependencies": {
+    "apollo-angular": "^1.0.1",
+    "apollo-angular-link-http": "^1.0.2-beta.0",
+    "apollo-cache-inmemory": "^1.1.11",
+    "apollo-client": "^2.2.7",
+    "apollo-link": "^1.2.1",
+    "apollo-link-ws": "^1.0.7",
+    "apollo-utilities": "^1.0.10",
+    "graphql": "^0.13.2",
+    "graphql-tag": "^2.8.0",
+    "subscriptions-transport-ws": "^0.9.6"
+  }
+}
