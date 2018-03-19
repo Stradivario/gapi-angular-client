@@ -70,7 +70,7 @@ define(["require", "exports", "@angular/core", "apollo-angular", "apollo-angular
          */
         GapiApolloService.prototype.setGraphqlDocuments = function (documents) {
             try {
-                this.graphqlDocs = JSON.parse(documents);
+                this.graphqlDocs = documents;
             }
             catch (e) {
                 throw new Error(e);

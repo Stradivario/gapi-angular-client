@@ -92,15 +92,27 @@ Create alias inside `gapi-cli.conf.yml` (Optional):
 ```yml
 commands:
   documents:
-    generate: gapi schema introspect --collect-documents --collect-types
+    collect: gapi schema introspect --collect-documents --collect-types
 ```
 
 Then execute as follow:
 
 ```bash
-gapi documents generate
+gapi documents collect
 ```
 
+On Runtime when angular compiler compiles if there is a missmatch between what you wrote and what is generated from schema collection you will get that kind of error:
+
+ ![Alt Text](https://raw.githubusercontent.com/Stradivario/gapi-cli-docs/master/src/assets/images/angular-error.png)
+
+
+Ts-lint will also give you a sign that something is wrong:
+
+ ![Alt Text](https://raw.githubusercontent.com/Stradivario/gapi-cli-docs/master/src/assets/images/angular-compiler-error.png)
+
+ Also you have one of the best features IDE String literal suggestion
+
+ ![Alt Test](https://raw.githubusercontent.com/Stradivario/gapi-cli-docs/master/src/assets/images/ide-suggestion.png)
 
 ### Then you are ready to import GapiApolloModule
 ##### Import GapiApolloModule.forRoot() in your Angular `AppModule` or `CoreModule`:
