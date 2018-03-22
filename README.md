@@ -1,4 +1,4 @@
-# @gapi-angular-client
+# @gapi/angular-client
 
 ##### This module is intended to be used with [Gapi Server](https://github.com/Stradivario/gapi) but can be used with every GraphQL Server
 
@@ -10,17 +10,17 @@
 ##### To install this library, run:
 
 ```bash
-$ npm install Stradivario/gapi-angular-client --save
+$ npm install @gapi/angular-client --save
 ```
 
 
-## Consuming @gapi-angular-client
+## Consuming @gapi/angular-client
 
 
 First we need to install gapi-cli to get Schema introspection
 
 ```bash
-npm i Stradivario/gapi-cli -g
+npm i @gapi/cli -g
 ```
 
 Create **gapi-cli.conf.yml** file inside root folder of your Repository with the following content
@@ -122,8 +122,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 
-// Import @gapi-angular-client
-import { GapiApolloModule } from 'gapi-angular-client';
+// Import @gapi/angular-client
+import { GapiApolloModule } from '@gapi/angular-client';
 
 // Enter your uri by default gapi-starter and gapi-advanced-starter are using localhost:9000
 const uri = 'localhost:9000';
@@ -151,7 +151,7 @@ Import GapiApolloService in your Angular `AppComponent` or `YourService`:
 
 ```typescript
 import { Component, Inject } from '@angular/core';
-import { GapiApolloService } from 'gapi-angular-client';
+import { GapiApolloService } from '@gapi/angular-client';
 import { IQuery, ISubscription, IMutation } from './core/api-introspection';
 import { Subscription } from 'rxjs/Subscription';
 
