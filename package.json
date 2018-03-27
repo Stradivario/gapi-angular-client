@@ -6,7 +6,7 @@
     "url": "https://github.com/Stradivario/gapi-angular-client.git"
   },
   "scripts":{
-    "postpublish":"git push -f ssh://git@gitlab.youvolio.com:522/gapi/gapi-angular-client.git"
+    "postpublish":"git push ssh://git@gitlab.youvolio.com:522/gapi/gapi-angular-client.git"
   },
   "author": {
     "name": "Kristian Tachev(Stradivario)",
