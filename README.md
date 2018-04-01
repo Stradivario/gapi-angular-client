@@ -76,10 +76,16 @@ Introspect your current API Schema and collect documents queries based on `*.gra
 
 Example generated types based on files `*.graphql*` inside your project
 ```typescript
-export type DocumentTypes =
- | 'findUser.query.graphql'
- | 'publishSignal.mutation.graphql'
- | 'subscribeToUserMessagesBasic.subscription.graphql';
+function strEnum<T extends string>(o: Array<T>): {[K in T]: K} {
+    return o.reduce((res, key) => {
+        res[key] = key;
+        return res;
+    }, Object.create(null));
+}
+const DocumentTypes = strEnum(['findUser.query.graphql',
+'publishSignal.mutation.graphql',
+'subscribeToUserMessagesBasic.subscription.graphql']);
+export type DocumentTypes = keyof typeof DocumentTypes;
 ```
 
 ```bash
@@ -168,6 +174,7 @@ import { DocumentTypes } from './core/api-introspection/documentTypes';
 })
 export class AppComponent {
   _subscription: Subscription;
+  _documentTypes: DocumentTypes = DocumentTypes;
   constructor(
     private gapiApolloService: GapiApolloService
   ) {
