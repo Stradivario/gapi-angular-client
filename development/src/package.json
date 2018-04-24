@@ -1,6 +1,6 @@
 {
   "name": "@gapi/angular-client",
-  "version": "0.7.161",
+  "version": "0.7.163",
   "repository": {
     "type": "git",
     "url": "https://github.com/Stradivario/gapi-angular-client.git"
@@ -27,15 +27,15 @@
     "zone.js": "^0.8.0"
   },
   "dependencies": {
-    "apollo-angular": "^1.0.1",
-    "apollo-angular-link-http": "^1.0.2-beta.0",
+    "apollo-angular": "1.0.1",
+    "apollo-angular-link-http": "1.0.2-beta.0",
     "apollo-cache-inmemory": "^1.1.11",
-    "apollo-client": "^2.2.7",
-    "apollo-link": "^1.2.1",
-    "apollo-link-ws": "^1.0.7",
-    "apollo-utilities": "^1.0.10",
-    "graphql": "^0.13.2",
-    "graphql-tag": "^2.8.0",
-    "subscriptions-transport-ws": "^0.9.6"
+    "apollo-client": "2.2.7",
+    "apollo-link": "1.2.1",
+    "apollo-link-ws": "1.0.7",
+    "apollo-utilities": "1.0.10",
+    "graphql": "0.13.2",
+    "graphql-tag": "2.8.0",
+    "subscriptions-transport-ws": "0.9.6"
   }
 }
