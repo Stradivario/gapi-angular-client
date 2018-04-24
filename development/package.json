@@ -1,12 +1,19 @@
 {
-  "name": "@gapi/angular-client",
-  "version": "0.7.161",
+  "name": "gapi-angular-client",
+  "version": "1.6.2",
+  "scripts": {
+    "build": "gulp build",
+    "build:watch": "gulp",
+    "docs": "npm run docs:build",
+    "docs:build": "compodoc -p tsconfig.json -n gapi-angular-client -d ../docs --hideGenerator",
+    "docs:serve": "npm run docs:build -- -s",
+    "docs:watch": "npm run docs:build -- -s -w",
+    "lint": "tslint --type-check --project tsconfig.json src/**/*.ts",
+    "test": "tsc && karma start"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/Stradivario/gapi-angular-client.git"
-  },
-  "scripts": {
-    "postpublish": "git push ssh://git@gitlab.youvolio.com:522/gapi/gapi-angular-client.git && git push --tags && git push ssh://git@gitlab.youvolio.com:522/gapi/gapi-angular-client.git --tags"
   },
   "author": {
     "name": "Kristian Tachev(Stradivario)",
@@ -17,25 +24,45 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "http://gitlab.youvolio.com/gapi/gapi-angular-client/issues"
+    "url": "http://gitlab.youvolio.com/open-source/gapi-angular-client/issues"
   },
-  "module": "gapi-angular-client.js",
-  "typings": "gapi-angular-client.d.ts",
-  "peerDependencies": {
-    "@angular/core": "^5.2.0",
-    "rxjs": "^5.5.0",
-    "zone.js": "^0.8.0"
+  "devDependencies": {
+    "@angular/common": "^4.0.0",
+    "@angular/compiler": "^4.0.0",
+    "@angular/compiler-cli": "^4.0.0",
+    "@angular/core": "^4.0.0",
+    "@angular/platform-browser": "^4.0.0",
+    "@angular/platform-browser-dynamic": "^4.0.0",
+    "@compodoc/compodoc": "^1.0.1",
+    "@types/jasmine": "2.5.38",
+    "@types/node": "~6.0.60",
+    "codelyzer": "~2.0.0",
+    "core-js": "^2.4.1",
+    "del": "^2.2.2",
+    "gulp": "^3.9.1",
+    "gulp-rollup": "^2.11.0",
+    "jasmine-core": "~2.5.2",
+    "jasmine-spec-reporter": "~3.2.0",
+    "karma": "~1.4.1",
+    "karma-chrome-launcher": "~2.0.0",
+    "karma-cli": "~1.0.1",
+    "karma-coverage-istanbul-reporter": "^0.2.0",
+    "karma-jasmine": "~1.1.0",
+    "karma-jasmine-html-reporter": "^0.2.2",
+    "node-watch": "^0.5.2",
+    "protractor": "~5.1.0",
+    "rollup": "^0.41.6",
+    "run-sequence": "^1.2.2",
+    "rxjs": "^5.1.0",
+    "ts-node": "~2.0.0",
+    "tslint": "~4.5.0",
+    "typescript": "^2.7.1",
+    "zone.js": "^0.8.4"
+  },
+  "engines": {
+    "node": ">=6.0.0"
   },
   "dependencies": {
-    "apollo-angular": "^1.0.1",
-    "apollo-angular-link-http": "^1.0.2-beta.0",
-    "apollo-cache-inmemory": "^1.1.11",
-    "apollo-client": "^2.2.7",
-    "apollo-link": "^1.2.1",
-    "apollo-link-ws": "^1.0.7",
-    "apollo-utilities": "^1.0.10",
-    "graphql": "^0.13.2",
-    "graphql-tag": "^2.8.0",
-    "subscriptions-transport-ws": "0.9.6"
+    "marked": "^0.3.9"
   }
 }
