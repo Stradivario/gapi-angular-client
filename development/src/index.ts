@@ -13,6 +13,7 @@ import { HttpLinkModule } from 'apollo-angular-link-http';
       HttpClientModule,
       ApolloModule,
       HttpLinkModule,
+      
     ],
     providers: [
         GapiApolloService

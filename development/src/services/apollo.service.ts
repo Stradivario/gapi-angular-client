@@ -9,21 +9,24 @@ import { HttpHeaders } from '@angular/common/http';
 import { ApolloLink, concat, split } from 'apollo-link';
 import { WebSocketLink } from 'apollo-link-ws';
 import { getMainDefinition } from 'apollo-utilities';
+import MessageTypes from 'subscriptions-transport-ws/dist/message-types';
+import { SubscriptionClient } from 'subscriptions-transport-ws';
 
 @Injectable()
 export class GapiApolloService {
     http: HttpLinkHandler = this.httpLink.create({ uri: this.config.uri });
     graphqlDocs;
     webSocketLink: WebSocketLink;
+    wsClient: SubscriptionClient;
     constructor(
         private apollo: Apollo,
         private httpLink: HttpLink,
         @Inject(GAPI_APOLLO_MODULE_CONFIG) private config: GapiApolloClientOptions
-    ) {}
-    
-    init() {
+    ) { }
+
+    init(options?: WebSocketLink.Configuration) {
         if (this.config.subscriptionsUri) {
-            this.createClientWithSubscriptions();
+            this.createClientWithSubscriptions(options);
         } else {
             this.createHttpClient();
         }
@@ -53,7 +56,6 @@ export class GapiApolloService {
             }), this.http),
             cache: new InMemoryCache()
         });
-
     }
 
     setAuthorizationToken(token: string) {
@@ -68,17 +70,20 @@ export class GapiApolloService {
         }
     }
 
-    createClientWithSubscriptions() {
-        this.webSocketLink = new WebSocketLink({
+    createClientWithSubscriptions(options?: WebSocketLink.Configuration) {
+        const config = Object.assign({
             uri: this.config.subscriptionsUri,
             options: {
                 reconnect: true,
+                lazy: true,
                 connectionParams: {
                     token: this.config.authorization,
                 },
             }
-        });
+        }, options);
 
+        this.webSocketLink = new WebSocketLink(config);
+        this.wsClient = this.webSocketLink['subscriptionClient'];
         this.apollo.create({
             link: concat(new ApolloLink((operation, forward) => {
                 operation.setContext({
@@ -125,13 +130,16 @@ export class GapiApolloService {
 
     subscription<T, K>(options: SubscriptionOptions | K, variables?: any): Observable<{ data: T }> {
         if (options.constructor === String) {
-            options = { query: this.importDocument(options), variables};
+            options = { query: this.importDocument(options), variables };
         }
         return this.apollo.subscribe(<any>options);
     }
 
     resetStore(): Promise<ApolloQueryResult<any>[]> {
-        this.webSocketLink['subscriptionClient'].close();
+        this.wsClient.close();
+        this.wsClient['connect']();
+        Object.keys(this.wsClient.operations)
+            .forEach((id) => this.wsClient['sendMessage'](id, MessageTypes.GQL_START, this.wsClient.operations[id].options));
         return this.apollo.getClient().resetStore();
     }
 }

@@ -4,6 +4,7 @@ import { GapiApolloClientOptions } from '../config';
 import { Observable } from 'rxjs/Observable';
 import { WatchQueryOptions, ApolloQueryResult, SubscriptionOptions, MutationOptions } from 'apollo-client';
 import { WebSocketLink } from 'apollo-link-ws';
+import { SubscriptionClient } from 'subscriptions-transport-ws';
 export declare class GapiApolloService {
     private apollo;
     private httpLink;
@@ -11,13 +12,14 @@ export declare class GapiApolloService {
     http: HttpLinkHandler;
     graphqlDocs: any;
     webSocketLink: WebSocketLink;
+    wsClient: SubscriptionClient;
     constructor(apollo: Apollo, httpLink: HttpLink, config: GapiApolloClientOptions);
-    init(): void;
+    init(options?: WebSocketLink.Configuration): void;
     importDocument(search: any): any;
     createHttpClient(): void;
     setAuthorizationToken(token: string): void;
     setGraphqlDocuments(documents: any): void;
-    createClientWithSubscriptions(): void;
+    createClientWithSubscriptions(options?: WebSocketLink.Configuration): void;
     mutation<T, K>(options: MutationOptions | K, variables?: any): Observable<{
         data: T;
     }>;

@@ -1,9 +1,12 @@
 {
-  "name": "gapi-angular-client",
-  "version": "0.0.1",
+  "name": "@gapi/angular-client",
+  "version": "0.7.161",
   "repository": {
     "type": "git",
     "url": "https://github.com/Stradivario/gapi-angular-client.git"
+  },
+  "scripts": {
+    "postpublish": "git push ssh://git@gitlab.youvolio.com:522/gapi/gapi-angular-client.git && git push --tags && git push ssh://git@gitlab.youvolio.com:522/gapi/gapi-angular-client.git --tags"
   },
   "author": {
     "name": "Kristian Tachev(Stradivario)",

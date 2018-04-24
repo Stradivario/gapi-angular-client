@@ -1,4 +1,4 @@
-define(["require", "exports", "@angular/core", "apollo-angular", "apollo-angular-link-http", "apollo-cache-inmemory", "../config", "rxjs/Observable", "@angular/common/http", "apollo-link", "apollo-link-ws", "apollo-utilities"], function (require, exports, core_1, apollo_angular_1, apollo_angular_link_http_1, apollo_cache_inmemory_1, config_1, Observable_1, http_1, apollo_link_1, apollo_link_ws_1, apollo_utilities_1) {
+define(["require", "exports", "@angular/core", "apollo-angular", "apollo-angular-link-http", "apollo-cache-inmemory", "../config", "rxjs/Observable", "@angular/common/http", "apollo-link", "apollo-link-ws", "apollo-utilities", "subscriptions-transport-ws/dist/message-types"], function (require, exports, core_1, apollo_angular_1, apollo_angular_link_http_1, apollo_cache_inmemory_1, config_1, Observable_1, http_1, apollo_link_1, apollo_link_ws_1, apollo_utilities_1, message_types_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
     var GapiApolloService = /** @class */ (function () {
@@ -14,11 +14,12 @@ define(["require", "exports", "@angular/core", "apollo-angular", "apollo-angular
             this.http = this.httpLink.create({ uri: this.config.uri });
         }
         /**
+         * @param {?=} options
          * @return {?}
          */
-        GapiApolloService.prototype.init = function () {
+        GapiApolloService.prototype.init = function (options) {
             if (this.config.subscriptionsUri) {
-                this.createClientWithSubscriptions();
+                this.createClientWithSubscriptions(options);
             }
             else {
                 this.createHttpClient();
@@ -77,19 +78,23 @@ define(["require", "exports", "@angular/core", "apollo-angular", "apollo-angular
             }
         };
         /**
+         * @param {?=} options
          * @return {?}
          */
-        GapiApolloService.prototype.createClientWithSubscriptions = function () {
+        GapiApolloService.prototype.createClientWithSubscriptions = function (options) {
             var _this = this;
-            this.webSocketLink = new apollo_link_ws_1.WebSocketLink({
+            var /** @type {?} */ config = Object.assign({
                 uri: this.config.subscriptionsUri,
                 options: {
                     reconnect: true,
+                    lazy: true,
                     connectionParams: {
                         token: this.config.authorization,
                     },
                 }
-            });
+            }, options);
+            this.webSocketLink = new apollo_link_ws_1.WebSocketLink(config);
+            this.wsClient = this.webSocketLink['subscriptionClient'];
             this.apollo.create({
                 link: apollo_link_1.concat(new apollo_link_1.ApolloLink(function (operation, forward) {
                     operation.setContext({
@@ -155,7 +160,11 @@ define(["require", "exports", "@angular/core", "apollo-angular", "apollo-angular
          * @return {?}
          */
         GapiApolloService.prototype.resetStore = function () {
-            this.webSocketLink['subscriptionClient'].close();
+            var _this = this;
+            this.wsClient.close();
+            this.wsClient['connect']();
+            Object.keys(this.wsClient.operations)
+                .forEach(function (id) { return _this.wsClient['sendMessage'](id, message_types_1.default.GQL_START, _this.wsClient.operations[id].options); });
             return this.apollo.getClient().resetStore();
         };
         GapiApolloService.decorators = [
@@ -186,6 +195,8 @@ define(["require", "exports", "@angular/core", "apollo-angular", "apollo-angular
         GapiApolloService.prototype.graphqlDocs;
         /** @type {?} */
         GapiApolloService.prototype.webSocketLink;
+        /** @type {?} */
+        GapiApolloService.prototype.wsClient;
         /** @type {?} */
         GapiApolloService.prototype.apollo;
         /** @type {?} */
