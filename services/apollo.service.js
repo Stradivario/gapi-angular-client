@@ -141,6 +141,20 @@ define(["require", "exports", "@angular/core", "apollo-angular", "apollo-angular
          * @param {?=} apolloOptions
          * @return {?}
          */
+        GapiApolloService.prototype.watchQuery = function (options, variables, apolloOptions) {
+            apolloOptions = apolloOptions || /** @type {?} */ ({});
+            if (options.constructor === String) {
+                options = __assign({ query: this.importDocument(options), variables: variables }, apolloOptions);
+            }
+            return this.apollo.watchQuery(/** @type {?} */ (options));
+        };
+        /**
+         * @template T, K
+         * @param {?} options
+         * @param {?=} variables
+         * @param {?=} apolloOptions
+         * @return {?}
+         */
         GapiApolloService.prototype.query = function (options, variables, apolloOptions) {
             var _this = this;
             apolloOptions = apolloOptions || /** @type {?} */ ({});

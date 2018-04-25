@@ -1,4 +1,4 @@
-import { Apollo } from 'apollo-angular';
+import { Apollo, QueryRef } from 'apollo-angular';
 import { HttpLink, HttpLinkHandler } from 'apollo-angular-link-http';
 import { GapiApolloClientOptions } from '../config';
 import { Observable } from 'rxjs/Observable';
@@ -23,6 +23,7 @@ export declare class GapiApolloService {
     mutation<T, K>(options: MutationOptions | K, variables?: any, apolloOptions?: MutationOptions): Observable<{
         data: T;
     }>;
+    watchQuery<T, K>(options: WatchQueryOptions | K, variables?: any, apolloOptions?: WatchQueryOptions): QueryRef<T>;
     query<T, K>(options: WatchQueryOptions | K, variables?: any, apolloOptions?: WatchQueryOptions): Observable<{
         data: T;
     }>;

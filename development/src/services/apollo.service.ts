@@ -112,6 +112,14 @@ export class GapiApolloService {
         return this.apollo.mutate(<any>options)
     }
 
+    watchQuery<T, K>(options: WatchQueryOptions | K, variables?, apolloOptions?: WatchQueryOptions): QueryRef<T> {
+        apolloOptions = apolloOptions || <any>{};
+        if (options.constructor === String) {
+            options = { query: this.importDocument(options), variables, ...apolloOptions };
+        }
+        return this.apollo.watchQuery<T>(<any>options);
+    }
+
     query<T, K>(options: WatchQueryOptions | K, variables?, apolloOptions?: WatchQueryOptions): Observable<{ data: T }> {
         apolloOptions = apolloOptions || <any>{};
         if (options.constructor === String) {
