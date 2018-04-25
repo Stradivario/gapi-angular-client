@@ -20,13 +20,13 @@ export declare class GapiApolloService {
     setAuthorizationToken(token: string): void;
     setGraphqlDocuments(documents: any): void;
     createClientWithSubscriptions(options?: WebSocketLink.Configuration): void;
-    mutation<T, K>(options: MutationOptions | K, variables?: any): Observable<{
+    mutation<T, K>(options: MutationOptions | K, variables?: any, apolloOptions?: MutationOptions): Observable<{
         data: T;
     }>;
-    query<T, K>(options: WatchQueryOptions | K, variables?: any): Observable<{
+    query<T, K>(options: WatchQueryOptions | K, variables?: any, apolloOptions?: WatchQueryOptions): Observable<{
         data: T;
     }>;
-    subscription<T, K>(options: SubscriptionOptions | K, variables?: any): Observable<{
+    subscription<T, K>(options: SubscriptionOptions | K, variables?: any, apolloOptions?: SubscriptionOptions): Observable<{
         data: T;
     }>;
     resetStore(): Promise<ApolloQueryResult<any>[]>;

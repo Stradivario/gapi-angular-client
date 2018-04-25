@@ -104,16 +104,18 @@ export class GapiApolloService {
         });
     }
 
-    mutation<T, K>(options: MutationOptions | K, variables?): Observable<{ data: T }> {
+    mutation<T, K>(options: MutationOptions | K, variables?, apolloOptions?: MutationOptions): Observable<{ data: T }> {
+        apolloOptions = apolloOptions || <any>{};
         if (options.constructor === String) {
-            options = { mutation: this.importDocument(options), variables };
+            options = { mutation: this.importDocument(options), variables, ...apolloOptions };
         }
         return this.apollo.mutate(<any>options)
     }
 
-    query<T, K>(options: WatchQueryOptions | K, variables?): Observable<{ data: T }> {
+    query<T, K>(options: WatchQueryOptions | K, variables?, apolloOptions?: WatchQueryOptions): Observable<{ data: T }> {
+        apolloOptions = apolloOptions || <any>{};
         if (options.constructor === String) {
-            options = { query: this.importDocument(options), variables };
+            options = { query: this.importDocument(options), variables, ...apolloOptions };
         }
         return Observable.create((observer) => {
             const subscription = this.apollo.watchQuery(<any>options)
@@ -128,9 +130,10 @@ export class GapiApolloService {
         });
     }
 
-    subscription<T, K>(options: SubscriptionOptions | K, variables?: any): Observable<{ data: T }> {
+    subscription<T, K>(options: SubscriptionOptions | K, variables?: any, apolloOptions?: SubscriptionOptions): Observable<{ data: T }> {
+        apolloOptions = apolloOptions || <any>{};
         if (options.constructor === String) {
-            options = { query: this.importDocument(options), variables };
+            options = { query: this.importDocument(options), variables, ...apolloOptions };
         }
         return this.apollo.subscribe(<any>options);
     }

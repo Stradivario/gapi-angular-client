@@ -1,3 +1,11 @@
+var __assign = (this && this.__assign) || Object.assign || function(t) {
+    for (var s, i = 1, n = arguments.length; i < n; i++) {
+        s = arguments[i];
+        for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+            t[p] = s[p];
+    }
+    return t;
+};
 define(["require", "exports", "@angular/core", "apollo-angular", "apollo-angular-link-http", "apollo-cache-inmemory", "../config", "rxjs/Observable", "@angular/common/http", "apollo-link", "apollo-link-ws", "apollo-utilities", "subscriptions-transport-ws/dist/message-types"], function (require, exports, core_1, apollo_angular_1, apollo_angular_link_http_1, apollo_cache_inmemory_1, config_1, Observable_1, http_1, apollo_link_1, apollo_link_ws_1, apollo_utilities_1, message_types_1) {
     "use strict";
     Object.defineProperty(exports, "__esModule", { value: true });
@@ -116,11 +124,13 @@ define(["require", "exports", "@angular/core", "apollo-angular", "apollo-angular
          * @template T, K
          * @param {?} options
          * @param {?=} variables
+         * @param {?=} apolloOptions
          * @return {?}
          */
-        GapiApolloService.prototype.mutation = function (options, variables) {
+        GapiApolloService.prototype.mutation = function (options, variables, apolloOptions) {
+            apolloOptions = apolloOptions || /** @type {?} */ ({});
             if (options.constructor === String) {
-                options = { mutation: this.importDocument(options), variables: variables };
+                options = __assign({ mutation: this.importDocument(options), variables: variables }, apolloOptions);
             }
             return this.apollo.mutate(/** @type {?} */ (options));
         };
@@ -128,12 +138,14 @@ define(["require", "exports", "@angular/core", "apollo-angular", "apollo-angular
          * @template T, K
          * @param {?} options
          * @param {?=} variables
+         * @param {?=} apolloOptions
          * @return {?}
          */
-        GapiApolloService.prototype.query = function (options, variables) {
+        GapiApolloService.prototype.query = function (options, variables, apolloOptions) {
             var _this = this;
+            apolloOptions = apolloOptions || /** @type {?} */ ({});
             if (options.constructor === String) {
-                options = { query: this.importDocument(options), variables: variables };
+                options = __assign({ query: this.importDocument(options), variables: variables }, apolloOptions);
             }
             return Observable_1.Observable.create(function (observer) {
                 var /** @type {?} */ subscription = _this.apollo.watchQuery(/** @type {?} */ (options))
@@ -148,11 +160,13 @@ define(["require", "exports", "@angular/core", "apollo-angular", "apollo-angular
          * @template T, K
          * @param {?} options
          * @param {?=} variables
+         * @param {?=} apolloOptions
          * @return {?}
          */
-        GapiApolloService.prototype.subscription = function (options, variables) {
+        GapiApolloService.prototype.subscription = function (options, variables, apolloOptions) {
+            apolloOptions = apolloOptions || /** @type {?} */ ({});
             if (options.constructor === String) {
-                options = { query: this.importDocument(options), variables: variables };
+                options = __assign({ query: this.importDocument(options), variables: variables }, apolloOptions);
             }
             return this.apollo.subscribe(/** @type {?} */ (options));
         };
