@@ -1,6 +1,6 @@
 {
   "name": "@gapi/angular-client",
-  "version": "1.0.26",
+  "version": "1.0.27",
   "repository": {
     "type": "git",
     "url": "https://github.com/Stradivario/gapi-angular-client.git"
