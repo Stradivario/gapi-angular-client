@@ -12,7 +12,7 @@
 ```bash
 $ npm install @gapi/angular-client --save
 ```
-
+NOTICE: Stay tuned angular 6,7,8........etc is preparing at this moment ;)
 
 ## Consuming @gapi/angular-client
 
