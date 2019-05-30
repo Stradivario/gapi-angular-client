@@ -2681,7 +2681,7 @@ minimatch@^2.0.1:
     brace-expansion "^1.0.0"
 
 minimatch@~0.2.11:
-  version "0.2.24"
+  version "0.2.28"
   resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-0.2.14.tgz#c74e780574f63c6f9a090e90efbe6ef53a6a756a"
   dependencies:
     lru-cache "2"
