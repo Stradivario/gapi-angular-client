@@ -224,7 +224,7 @@ app-root-path@^2.0.1:
   resolved "https://registry.yarnpkg.com/app-root-path/-/app-root-path-2.0.1.tgz#cd62dcf8e4fd5a417efc664d2e5b10653c651b46"
 
 append-transform@^0.4.0:
-  version "0.6.5"
+  version "0.7.3"
   resolved "https://registry.yarnpkg.com/append-transform/-/append-transform-0.4.0.tgz#d76ebf8ca94d276e247a36bad44a4b74ab611991"
   dependencies:
     default-require-extensions "^1.0.0"
@@ -325,7 +325,7 @@ async@^2.1.4:
     lodash "^4.14.0"
 
 asynckit@^0.4.0:
-  version "0.6.5"
+  version "0.7.3"
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
 
 attempt-x@^1.1.0, attempt-x@^1.1.1:
@@ -2681,7 +2681,7 @@ minimatch@^2.0.1:
     brace-expansion "^1.0.0"
 
 minimatch@~0.2.11:
-  version "0.6.5"
+  version "0.7.3"
   resolved "https://registry.yarnpkg.com/minimatch/-/minimatch-0.2.14.tgz#c74e780574f63c6f9a090e90efbe6ef53a6a756a"
   dependencies:
     lru-cache "2"
@@ -3837,7 +3837,7 @@ term-size@^1.2.0:
     execa "^0.7.0"
 
 through2@^0.6.1:
-  version "0.6.5"
+  version "0.7.3"
   resolved "https://registry.yarnpkg.com/through2/-/through2-0.6.5.tgz#41ab9c67b29d57209071410e1d7a7a968cd3ad48"
   dependencies:
     readable-stream ">=1.0.33-1 <1.1.0-0"
