@@ -36,6 +36,6 @@
     "apollo-utilities": "^1.0.10",
     "graphql": "^0.13.2",
     "graphql-tag": "^2.8.0",
-    "subscriptions-transport-ws": "0.9.6"
+    "subscriptions-transport-ws": "0.9.10"
   }
 }
